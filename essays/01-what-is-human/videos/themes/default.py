@@ -1,0 +1,11 @@
+BACKGROUND = (0,0,0)
+
+TEXT_COLOR = "white"
+
+FONT_SIZE = 70
+
+FPS = 30
+
+WIDTH = 1920
+
+HEIGHT = 1080

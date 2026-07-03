@@ -1,0 +1,104 @@
+name: Semut Narrative Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+
+  validate:
+    name: Validate Repository
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check Markdown files
+        uses: DavidAnson/markdownlint-cli2-action@v18
+
+  diagrams:
+    name: Build Diagrams
+    needs: validate
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          pip install matplotlib networkx pillow
+
+      - name: Generate diagrams
+        run: |
+          if [ -f tools/build_diagrams.py ]; then
+            python tools/build_diagrams.py
+          else
+            echo "No diagram builder yet."
+          fi
+
+      - name: Upload diagrams
+        uses: actions/upload-artifact@v4
+        with:
+          name: diagrams
+          path: diagrams/
+
+  slides:
+    name: Build Slides
+    needs: diagrams
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build slides
+        run: |
+          echo "Slides generation coming soon."
+
+  video:
+    name: Render Video
+    needs: slides
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install MoviePy
+        run: |
+          pip install moviepy pillow
+
+      - name: Render video
+        run: |
+          if [ -f tools/render_video.py ]; then
+            python tools/render_video.py
+          else
+            echo "Video renderer not implemented."
+          fi
+
+      - name: Upload video
+        uses: actions/upload-artifact@v4
+        with:
+          name: videos
+          path: output/
+
+  pages:
+    name: Deploy Website
+    needs:
+      - validate
+      - diagrams
+      - slides
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo "GitHub Pages deployment will be added later."

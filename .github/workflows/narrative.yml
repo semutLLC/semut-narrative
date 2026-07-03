@@ -1,10 +1,15 @@
 name: Semut Narrative Pipeline
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
+  workflow_dispatch:
+
+  # Automatic CI (re-enable later)
+  #
+  # push:
+  #   branches:
+  #     - main
+  #
+  # pull_request:
 
 jobs:
 

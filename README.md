@@ -24,7 +24,9 @@ As more capabilities move outside ourselves, what remains fundamentally human?
 
 Semut begins from this question.
 
-Rather than defining humanity from a single philosophical tradition, Semut explores ideas across philosophy, biology, anthropology, cognitive science, history, and engineering.
+Rather than defining humanity from a single philosophical tradition, Semut explores ideas across philosophy, biology, anthropology, cognitive science, history, engineering, and other disciplines.
+
+The goal is not to replace these perspectives, but to explore whether they can be understood within a common coordination framework.
 
 This repository contains essays, presentations, diagrams, videos, and educational materials that explain the ideas behind Semut.
 
